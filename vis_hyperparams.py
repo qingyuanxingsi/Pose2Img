@@ -3,17 +3,18 @@ import numpy as np
 import cv2
 import glob2 as gb
 from util import make_cluster_kp, make_limb_masks, pose137_to_pose122
+import matplotlib.pyplot as plt
 
        
 def display(cfg):
     img_base = cfg.PATH.img_base
     kp_base = cfg.PATH.kp_base
-    all_img_path = sorted(gb.glob(os.path.join(img_base, "*"+cfg.PATH.img_extension)))
-    for i in range(len(all_img_path)):
-        img_path = all_img_path[i]
-        path = img_path.split("/")[-1]
+    all_npy_path = sorted(gb.glob(os.path.join(kp_base, "*.npy")))
+    for i in range(len(all_npy_path)):
+        key_name = all_npy_path[i]
+        path = key_name.split("/")[-1]
         filename, file_extension = os.path.splitext(path)  
-        key_name = os.path.join(kp_base,filename+'.npy')
+        img_path = os.path.join(img_base,filename+'.jpg')
 
         kp_tmp = np.load(key_name)
         if kp_tmp.shape[0]==122 and kp_tmp.shape[1]==2:  #(122,2)
@@ -45,8 +46,9 @@ def vis_gaussian_map(img, kp, cfg, flag = False):
             kp_canvas = np.expand_dims(kp_canvas,-1).repeat(3,axis=2)
             # tmp = np.concatenate([img/255.0,kp_canvas],axis=1)
             tmp =img/255.0+kp_canvas
-            cv2.imshow("joint cluster",tmp)
-            cv2.waitKey()
+            cv2.imwrite('joint_cluster.jpg', tmp*255.0)
+            # cv2.imshow("joint cluster",tmp)
+            # cv2.waitKey()
     # limbs masks
     else:
         print(kp.shape)
@@ -56,8 +58,9 @@ def vis_gaussian_map(img, kp, cfg, flag = False):
             canvas = limb_masks[channel,:,:][..., None]
             canvas = canvas.repeat(3,axis=-1)
             tmp =img/255.0 + canvas
-            cv2.imshow("limbs masks",tmp)
-            cv2.waitKey()
+            cv2.imwrite('limbs_mask.jpg', tmp*255.0)
+            # cv2.imshow("limbs masks",tmp)
+            # cv2.waitKey()
 
 
 
