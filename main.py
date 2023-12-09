@@ -4,7 +4,8 @@ import numpy as np
 import cv2
 import argparse
 import torch
-
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 root = './'
 ckpt_dir = os.path.join(root, 'ckpt')
