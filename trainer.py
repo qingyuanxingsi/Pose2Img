@@ -8,6 +8,7 @@ from dataset import WarpDataset
 import threading
 from d_loss import *
 from util import *
+from tqdm import tqdm
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 class Trainer():
@@ -26,7 +27,7 @@ class Trainer():
         self.criterionDfake = LossDSCfake()
 
         # optimizer
-
+        print("> Config optim...")
         if (opt_parser.load_ckpt_path != ''):
             ckpt = torch.load(opt_parser.load_ckpt_path)
             try:
@@ -88,7 +89,7 @@ class Trainer():
        
 
         g_time = 0.0
-        for i, batch in enumerate(self.dataloader):
+        for i, batch in enumerate(tqdm(self.dataloader)):
             if(i >= len(self.dataloader)-2):
                 break
             st_batch = time.time()

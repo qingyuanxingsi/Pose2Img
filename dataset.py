@@ -33,7 +33,7 @@ class WarpDataset(Dataset):
         self.limbs = [[0,8,9],[1,2,5],[2,3],[3,4],[5,6],[6,7],range(101,122),range(80,101)]
 
         if mode == "train":
-            self.kp_path = all_kp_path[256:1280]
+            self.kp_path = all_kp_path[256:]
             self.len = len(self.kp_path) 
         elif mode == "val":
             self.kp_path = all_kp_path[:256] 
