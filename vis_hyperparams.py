@@ -46,7 +46,7 @@ def vis_gaussian_map(img, kp, cfg, flag = False):
             kp_canvas = np.expand_dims(kp_canvas,-1).repeat(3,axis=2)
             # tmp = np.concatenate([img/255.0,kp_canvas],axis=1)
             tmp =img/255.0+kp_canvas
-            cv2.imwrite('joint_cluster.jpg', tmp*255.0)
+            cv2.imwrite(f'vis/joint_cluster_{channel}.jpg', tmp*255.0)
             # cv2.imshow("joint cluster",tmp)
             # cv2.waitKey()
     # limbs masks
@@ -58,7 +58,7 @@ def vis_gaussian_map(img, kp, cfg, flag = False):
             canvas = limb_masks[channel,:,:][..., None]
             canvas = canvas.repeat(3,axis=-1)
             tmp =img/255.0 + canvas
-            cv2.imwrite('limbs_mask.jpg', tmp*255.0)
+            cv2.imwrite(f'vis/limbs_mask_{channel}.jpg', tmp*255.0)
             # cv2.imshow("limbs masks",tmp)
             # cv2.waitKey()
 

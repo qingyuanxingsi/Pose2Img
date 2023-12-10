@@ -19,6 +19,6 @@ POSE2IMAGE:
 
   INFER:
     root_node: [[343.98968094],[222.96735321]]
-    ckpt_path: "ckpt/xiang/ckpt_final.pth"  
+    ckpt_path: "ckpt/xiang/ckpt_last.pth"  
     src_img_path: "/mllab/codehub/SpeechDrivesTemplates/datasets/speakers/xiang/frames/xiang/xiang_007329.jpg"   
-    src_kp_path: "/mllab/codehub/SpeechDrivesTemplates/datasets/speakers/xiang/frames/xiang/xiang_007329.npy"
+    src_kp_path: "/mllab/codehub/SpeechDrivesTemplates/datasets/speakers/xiang/tmp/cleaned_pose_2d/xiang/xiang_007329.npy"
