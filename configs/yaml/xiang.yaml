@@ -1,7 +1,7 @@
 POSE2IMAGE:
   PATH:
-    img_base : "/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/Pose2Img/data/xiang/imgs"    
-    kp_base : "/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/Pose2Img/data/xiang/keypoints"   
+    img_base : "data/xiang/imgs"    
+    kp_base : "data/xiang/keypoints"   
     img_extension: '.jpg'
 
 
@@ -12,13 +12,13 @@ POSE2IMAGE:
   HYPERPARAM:
     img_H : 320
     img_W : 320
-    kp_var_root: [10,10,10,10,10,10,10,4,2,3,2,4,4]
-    mask_sigma_perp: [35, 25, 25, 20, 25, 20, 10, 10]
+    kp_var_root: [10,10,8,10,10,10,10,4,2,3,2,4,4]
+    mask_sigma_perp: [35, 25, 25, 20, 25, 18, 10, 12]
     scale : 1.0
  
 
   INFER:
-    root_node: [[343.98968094],[222.96735321]]
+    root_node: [[344.82444244],[222.39235733]]
     ckpt_path: "ckpt/xiang/ckpt_last.pth"  
-    src_img_path: "/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/Pose2Img/data/xiang/imgs/xiang_007329.jpg"   
-    src_kp_path: "/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/Pose2Img/data/xiang/keypoints/xiang_007329.npy"
+    src_img_path: "data/xiang/imgs/xiang_007329.jpg"   
+    src_kp_path: "data/xiang/keypoints/xiang_007329.npy"

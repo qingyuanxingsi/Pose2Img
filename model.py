@@ -162,7 +162,9 @@ class VGGLoss(nn.Module):
 class Vgg19(nn.Module):
     def __init__(self, requires_grad=False):
         super(Vgg19, self).__init__()
-        vgg_pretrained_features = models.vgg19(pretrained=True).features
+        model = models.vgg19(pretrained=False)
+        model.load_state_dict(torch.load("/mnt/cephfs/doodleliang/model_hub/vgg19-dcbb9e9d.pth"))
+        vgg_pretrained_features = model.features
         self.slice1 = nn.Sequential()
         self.slice2 = nn.Sequential()
         self.slice3 = nn.Sequential()

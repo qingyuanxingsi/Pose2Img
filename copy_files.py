@@ -2,12 +2,13 @@
 
 import os
 import shutil
+from tqdm import tqdm
 
-kp_base = r'/mllab/codehub/SpeechDrivesTemplates/datasets/speakers/xiang/tmp/rescaled_pose_2d/xiang'
+kp_base = r'/mllab/codehub/SpeechDrivesTemplates/datasets/speakers/xiang/tmp/cleaned_pose_2d/xiang'
 img_base = r'/mllab/codehub/SpeechDrivesTemplates/datasets/speakers/xiang/frames/xiang'
-copy_dir = r'/mllab/codehub/Pose2Img/data/xiang'
+copy_dir = r'/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/Pose2Img/data/xiang'
 
-for file in os.listdir(kp_base):
+for file in tqdm(os.listdir(kp_base)):
     cur_path = os.path.join(kp_base, file)
     name, ext = os.path.splitext(file)
     img_path = os.path.join(img_base, name + '.jpg')

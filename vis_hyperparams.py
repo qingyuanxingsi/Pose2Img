@@ -12,9 +12,11 @@ def display(cfg):
     all_npy_path = sorted(gb.glob(os.path.join(kp_base, "*.npy")))
     for i in range(len(all_npy_path)):
         key_name = all_npy_path[i]
+        print(key_name)
         path = key_name.split("/")[-1]
         filename, file_extension = os.path.splitext(path)  
         img_path = os.path.join(img_base,filename+'.jpg')
+        print(img_path)
 
         kp_tmp = np.load(key_name)
         if kp_tmp.shape[0]==122 and kp_tmp.shape[1]==2:  #(122,2)

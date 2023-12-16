@@ -4,6 +4,7 @@ import cv2
 
 from torch.utils.data import Dataset, DataLoader
 import glob2 as gb
+import random
 from util import *
 from torch.multiprocessing import Manager
 from configs import get_cfg_defaults
@@ -18,6 +19,7 @@ class WarpDataset(Dataset):
         cfg = cfg.POSE2IMAGE
 
         all_kp_path = sorted(gb.glob(os.path.join(cfg.PATH.kp_base, '*.npy')))[::]
+        random.shuffle(all_kp_path)
         self.img_extension = cfg.PATH.img_extension
         self.img_base = cfg.PATH.img_base
 
@@ -33,7 +35,7 @@ class WarpDataset(Dataset):
         self.limbs = [[0,8,9],[1,2,5],[2,3],[3,4],[5,6],[6,7],range(101,122),range(80,101)]
 
         if mode == "train":
-            self.kp_path = all_kp_path[256:]
+            self.kp_path = all_kp_path[256:256+1024]
             self.len = len(self.kp_path) 
         elif mode == "val":
             self.kp_path = all_kp_path[:256] 
