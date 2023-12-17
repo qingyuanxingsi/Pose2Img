@@ -19,6 +19,7 @@ def display(cfg):
         print(img_path)
 
         kp_tmp = np.load(key_name)
+        kp_tmp = kp_tmp/cfg.HYPERPARAM.scale
         if kp_tmp.shape[0]==122 and kp_tmp.shape[1]==2:  #(122,2)
             kp_122 = kp_tmp
         else:#(3,137)

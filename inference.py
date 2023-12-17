@@ -44,8 +44,7 @@ class NPZ_infer(Dataset):
         self.kp_path = sorted(gb.glob(os.path.join(cfg.PATH.kp_base, '*.npy')))
 
         self.root_node_mean = np.array(cfg.INFER.root_node)   # root for performer
-
-
+        
         np_kpts = np.insert(np_kpts, 1, np.zeros(2), axis=2)
         np_kpts = (np_kpts / cfg.INFER.scale) + self.root_node_mean
 
@@ -53,6 +52,7 @@ class NPZ_infer(Dataset):
 
         self.np_kpts = np_kpts.transpose(0,2,1)
         self.np_kpts /= self.scale
+        print(self.np_kpts.shape)
         self.limbs = [[0,8,9],[1,2,5],[2,3],[3,4],[5,6],[6,7],range(101,122),range(80,101)]
         
         self.source_dict = self.process_source()
@@ -65,7 +65,6 @@ class NPZ_infer(Dataset):
         kp_tgt = self.np_kpts[idx]
         kp_src = self.source_dict["kp"]
         src_in = self.source_dict["img"]
-        
         
         trans_in = get_limb_transforms(self.limbs, kp_src, kp_tgt)
 
@@ -102,6 +101,7 @@ class NPZ_infer(Dataset):
 
 
 def infer_only(cfg, infer_loader):
+    print("> Loading model...")
     G = WarpModel(n_joints = 13, n_limbs = 8)
     ckpt = torch.load(cfg.INFER.ckpt_path)
     G.load_state_dict(ckpt['G'])
@@ -112,6 +112,7 @@ def infer_only(cfg, infer_loader):
     G = nn.DataParallel(G)
     G.to(device)
     G.eval()
+    print("> Model loaded")
 
     results = []
     with torch.no_grad():
@@ -180,7 +181,7 @@ if __name__=="__main__":
     parser.add_argument("--output_path", default = './results',help="output path", type=str)
     parser.add_argument("--npz_path", default ='target_pose/Oliver/varying_tmplt.npz', help="target pose npz path", type=str)
     parser.add_argument("--wav_path", default ='target_pose/Oliver/varying_tmplt.mp4',help="target audio path", type=str)
-    parser.add_argument("--to_video", default = True,help= "use ffmpeg", type=bool)
+    parser.add_argument("--to_video", default=True,help= "use ffmpeg", type=bool)
     parser.add_argument('--batch_size', type=int, default=8, help='batch size')
 
     args = parser.parse_args()
