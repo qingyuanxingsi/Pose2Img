@@ -34,6 +34,10 @@ parser.add_argument('--load_ckpt_path', type=str, default='')
 
 
 if __name__=="__main__":
+    root_dir = r'/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common'
+    if not os.path.exists(root_dir):
+        root_dir = '/mnt/cephfs'
+    os.environ['ROOT_DIR'] = root_dir
     from trainer import Trainer
     opt_parser = parser.parse_args()
     model = Trainer(opt_parser)

@@ -19,7 +19,7 @@ POSE2IMAGE:
 
   INFER:
     root_node: [[344.82444244],[222.39235733]]
-    ckpt_path: "/mllab/codehub/Pose2Img/ckpt/xiang/ckpt_last.pth"  
+    ckpt_path: "/mllab/codehub/Pose2Img/ckpt/xiang/ckpt_11.pth"  
     src_img_path: "data/xiang/imgs/xiang_007329.jpg"   
     src_kp_path: "data/xiang/keypoints/xiang_007329.npy"
     scale: 2.5720

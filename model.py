@@ -4,6 +4,7 @@ import torch.nn.parallel
 import torch.nn.functional as F
 from torchvision import models
 from util import make_warped_stack
+import os
 
 class ResUnetGenerator(nn.Module):
     def __init__(self, input_nc, output_nc, num_downs, ngf=64,
@@ -163,7 +164,8 @@ class Vgg19(nn.Module):
     def __init__(self, requires_grad=False):
         super(Vgg19, self).__init__()
         model = models.vgg19(pretrained=False)
-        model.load_state_dict(torch.load("/mnt/cephfs/doodleliang/model_hub/vgg19-dcbb9e9d.pth"))
+        root_dir = os.environ['ROOT_DIR']
+        model.load_state_dict(torch.load(f"{root_dir}/doodleliang/model_hub/vgg19-dcbb9e9d.pth"))
         vgg_pretrained_features = model.features
         self.slice1 = nn.Sequential()
         self.slice2 = nn.Sequential()

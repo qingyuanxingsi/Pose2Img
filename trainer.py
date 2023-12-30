@@ -106,11 +106,6 @@ class Trainer():
             pose_src = batchify_cluster_kp(kp_src,int(self.dataset.img_W/scale), int(self.dataset.img_H/scale), self.dataset.cfg.HYPERPARAM.kp_var_root)
             pose_target = batchify_cluster_kp(kp_tgt,int(self.dataset.img_W/scale), int(self.dataset.img_H/scale), self.dataset.cfg.HYPERPARAM.kp_var_root)
             
-              
-            # print(pose_src.shape)
-            # print(pose_target.shape)
-            # print(src_mask_prior.shape)
-            # print(src_in.shape)
             g_out = self.G(src_in, pose_src, pose_target, src_mask_prior, trans_in)
             loss_l1 = 10 * self.criterionL1(g_out, target)
             loss_vgg, loss_style = self.criterionVGG(g_out, target, style=True)

@@ -1,0 +1,25 @@
+POSE2IMAGE:
+  PATH:
+    img_base : "data/luo/imgs"    
+    kp_base : "data/luo/keypoints"   
+    img_extension: '.jpg'
+
+
+  TRAIN:
+    CROP:
+      W_bias: 230
+      H_bias: 130
+  HYPERPARAM:
+    img_H : 320
+    img_W : 448
+    kp_var_root: [10,10,8,10,10,10,10,4,2,3,2,4,4]
+    mask_sigma_perp: [35, 25, 25, 20, 25, 18, 10, 12]
+    scale : 1.0
+ 
+
+  INFER:
+    root_node: [[458.55882401],[288.81871704]]
+    ckpt_path: "/mllab/codehub/Pose2Img/ckpt/xiang/ckpt_11.pth"  
+    src_img_path: "data/luo/imgs/demo_000082.jpg"   
+    src_kp_path: "data/luo/keypoints/demo_000082.npy"
+    scale: 1.9028

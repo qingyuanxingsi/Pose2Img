@@ -16,6 +16,6 @@ def compute_root_node(npy_base):
     return sum_result/cnt
 
 if __name__ == "__main__":
-    npy_base = "data/xiang/keypoints"
+    npy_base = "data/luo/keypoints"
     print(compute_root_node(npy_base))
 
